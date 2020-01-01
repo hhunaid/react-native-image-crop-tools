@@ -11,6 +11,9 @@
 
 RCT_EXPORT_VIEW_PROPERTY(sourceUrl, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onImageCropPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(keepAspectRatio, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(cropAspectRatio, CGFloat)
+
 RCT_EXTERN_METHOD(getCroppedImage:(nonnull NSNumber *))
 
 @end

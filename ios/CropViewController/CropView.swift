@@ -42,14 +42,15 @@ open class CropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate, 
     open var croppedImage: UIImage? {
         return image?.rotatedImageWithTransform(rotation, croppedToRect: zoomedCropRect())
     }
-    open var keepAspectRatio = false {
+    @objc open var keepAspectRatio = false {
         didSet {
             cropRectView.keepAspectRatio = keepAspectRatio
         }
     }
-    open var cropAspectRatio: CGFloat {
+    @objc open var cropAspectRatio: CGFloat {
         set {
-            setCropAspectRatio(newValue, shouldCenter: true)
+            _aspectRatio = newValue
+            setCropAspectRatio(shouldCenter: true)
         }
         get {
             let rect = scrollView.frame
@@ -126,6 +127,7 @@ open class CropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate, 
     fileprivate var usingCustomImageView = false
     fileprivate let MarginTop: CGFloat = 37.0
     fileprivate let MarginLeft: CGFloat = 20.0
+    private var _aspectRatio: CGFloat?
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -222,6 +224,8 @@ open class CropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate, 
         
         if !resizing {
             layoutCropRectViewWithCropRect(scrollView.frame)
+            cropRectView.recalculateAspectRatio()
+            setCropAspectRatio(shouldCenter: true)
             if self.interfaceOrientation != interfaceOrientation {
                 zoomToCropRect(scrollView.frame)
             }
@@ -454,19 +458,21 @@ open class CropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate, 
         }
     }
     
-    fileprivate func setCropAspectRatio(_ ratio: CGFloat, shouldCenter: Bool) {
+    fileprivate func setCropAspectRatio(shouldCenter: Bool) {
+        guard let ratio = self._aspectRatio, let imageView = self.imageView else { return }
+        
         var cropRect = scrollView.frame
         var width = cropRect.width
         var height = cropRect.height
         if ratio <= 1.0 {
             width = height * ratio
-            if width > imageView!.bounds.width {
+            if width > imageView.bounds.width {
                 width = cropRect.width
                 height = width / ratio
             }
         } else {
             height = width / ratio
-            if height > imageView!.bounds.height {
+            if height > imageView.bounds.height {
                 height = cropRect.height
                 width = height * ratio
             }

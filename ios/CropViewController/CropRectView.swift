@@ -29,11 +29,7 @@ class CropRectView: UIView, ResizeControlDelegate {
     }
     var keepAspectRatio = false {
         didSet {
-            if keepAspectRatio {
-                let width = bounds.width
-                let height = bounds.height
-                fixedAspectRatio = min(width / height, height / width)
-            }
+            recalculateAspectRatio()
         }
     }
     
@@ -167,6 +163,14 @@ class CropRectView: UIView, ResizeControlDelegate {
     
     func resizeControlDidEndResizing(_ control: ResizeControl) {
         delegate?.cropRectViewDidEndEditing(self)
+    }
+    
+    public func recalculateAspectRatio() {
+        if keepAspectRatio {
+            let width = bounds.width
+            let height = bounds.height
+            fixedAspectRatio = min(width / height, height / width)
+        }
     }
     
     fileprivate func cropRectWithResizeControlView(_ resizeControl: ResizeControl) -> CGRect {

@@ -14,31 +14,42 @@ type Response = {
   uri: string;
   width: number;
   height: number;
-}
+};
 
 type Props = {
   sourceUrl?: string;
-  style?: StyleProp<ViewProps>
+  style?: StyleProp<ViewProps>;
   onImageCrop?: (res: Response) => void;
-}
+  keepAspectRatio?: boolean;
+  aspectRatio?: number
+};
 
 class CropView extends React.PureComponent<Props> {
+  public static defaultProps = {
+    keepAspectRatio: false
+  };
+
   public getCroppedImage = () => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this),
-      UIManager.getViewManagerConfig('CropView').Commands
-        .getCroppedImage,
-      [],
+      UIManager.getViewManagerConfig('CropView').Commands.getCroppedImage,
+      []
     );
   };
 
   public render() {
-    const { sourceUrl, style, onImageCrop } = this.props;
+    const { sourceUrl, style, onImageCrop, keepAspectRatio, aspectRatio } = this.props;
 
     return (
-      <RCTCropView sourceUrl={sourceUrl} style={style} onImageCropPress={(event: NativeSyntheticEvent<Response>) => {
-        onImageCrop!(event.nativeEvent);
-      }}/>
+      <RCTCropView
+        sourceUrl={sourceUrl}
+        style={style}
+        onImageCropPress={(event: NativeSyntheticEvent<Response>) => {
+          onImageCrop!(event.nativeEvent);
+        }}
+        keepAspectRatio={keepAspectRatio}
+        cropAspectRatio={aspectRatio}
+      />
     );
   }
 }
