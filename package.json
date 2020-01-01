@@ -1,0 +1,47 @@
+{
+  "name": "react-native-image-crop-tools",
+  "title": "React Native Image Crop Tools",
+  "version": "1.0.0",
+  "description": "TODO",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json --fix",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parsempo/react-native-image-crop-tools.git",
+    "baseUrl": "https://github.com/parsempo/react-native-image-crop-tools"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Hunaid Hassan",
+    "email": "hhunaid@gmail.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.59.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.0",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.7.2",
+    "prettier": "^1.19.1",
+    "@types/react-native": "^0.60.23"
+  }
+}
