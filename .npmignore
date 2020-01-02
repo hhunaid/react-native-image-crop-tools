@@ -1,0 +1,8 @@
+src/
+Example/
+README.md
+tsconfig.json
+tslint.json
+node_modules
+.prettierrc
+.watchmanconfig
