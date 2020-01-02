@@ -21,12 +21,12 @@ type Props = {
   style?: StyleProp<ViewProps>;
   onImageCrop?: (res: Response) => void;
   keepAspectRatio?: boolean;
-  aspectRatio?: number
+  aspectRatio?: number;
 };
 
 class CropView extends React.PureComponent<Props> {
   public static defaultProps = {
-    keepAspectRatio: false
+    keepAspectRatio: false,
   };
 
   private viewRef = createRef<any>();
