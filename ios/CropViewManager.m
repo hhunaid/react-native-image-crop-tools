@@ -10,10 +10,10 @@
 @interface RCT_EXTERN_MODULE(CropViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(sourceUrl, NSString)
-RCT_EXPORT_VIEW_PROPERTY(onImageCropPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onImageSaved, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(keepAspectRatio, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(cropAspectRatio, CGFloat)
 
-RCT_EXTERN_METHOD(getCroppedImage:(nonnull NSNumber *))
+RCT_EXTERN_METHOD(saveImage:(nonnull NSNumber *))
 
 @end

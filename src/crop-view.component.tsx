@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import {
   findNodeHandle,
   NativeSyntheticEvent,
@@ -29,11 +29,13 @@ class CropView extends React.PureComponent<Props> {
     keepAspectRatio: false
   };
 
-  public getCroppedImage = () => {
+  private viewRef = createRef<any>();
+
+  public saveImage = (quality: number) => {
     UIManager.dispatchViewManagerCommand(
-      findNodeHandle(this),
-      UIManager.getViewManagerConfig('CropView').Commands.getCroppedImage,
-      []
+      findNodeHandle(this.viewRef.current!),
+      UIManager.getViewManagerConfig('CropView').Commands.saveImage,
+      [quality]
     );
   };
 
@@ -42,9 +44,10 @@ class CropView extends React.PureComponent<Props> {
 
     return (
       <RCTCropView
+        ref={this.viewRef}
         sourceUrl={sourceUrl}
         style={style}
-        onImageCropPress={(event: NativeSyntheticEvent<Response>) => {
+        onImageSaved={(event: NativeSyntheticEvent<Response>) => {
           onImageCrop!(event.nativeEvent);
         }}
         keepAspectRatio={keepAspectRatio}

@@ -16,9 +16,9 @@ class CropViewManager: RCTViewManager {
     override func view() -> UIView! {
         return CropView()
     }
-    
-    @objc(getCroppedImage:)
-    func getCroppedImage(_ reactTag: NSNumber) {
+
+    @objc(saveImage:)
+    func saveImage(_ reactTag: NSNumber) {
         self.bridge!.uiManager.addUIBlock { (uiManager, viewRegistry) in
             if let cropView = viewRegistry?[reactTag] as? CropView {
                 cropView.fireEvent()
