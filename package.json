@@ -17,8 +17,8 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/parsempo/react-native-image-crop-tools.git",
-    "baseUrl": "https://github.com/parsempo/react-native-image-crop-tools"
+    "url": "git+https://github.com/hhunaid/react-native-image-crop-tools.git",
+    "baseUrl": "https://github.com/hhunaid/react-native-image-crop-tools"
   },
   "keywords": [
     "react-native"
