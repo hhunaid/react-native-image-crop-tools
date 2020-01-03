@@ -5,7 +5,7 @@ import {
   requireNativeComponent,
   StyleProp,
   UIManager,
-  ViewProps,
+  ViewStyle,
 } from 'react-native';
 
 const RCTCropView = requireNativeComponent('CropView');
@@ -17,8 +17,8 @@ type Response = {
 };
 
 type Props = {
-  sourceUrl?: string;
-  style?: StyleProp<ViewProps>;
+  sourceUrl: string;
+  style?: StyleProp<ViewStyle>;
   onImageCrop?: (res: Response) => void;
   keepAspectRatio?: boolean;
   aspectRatio?: number;
@@ -35,7 +35,7 @@ class CropView extends React.PureComponent<Props> {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.viewRef.current!),
       UIManager.getViewManagerConfig('CropView').Commands.saveImage,
-      [quality]
+      [quality],
     );
   };
 
