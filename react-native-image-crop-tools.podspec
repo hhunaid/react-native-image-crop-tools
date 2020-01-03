@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.resource_bundles = { 'CropViewController' =>'ios/CropViewController/*.png' }
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true
+  s.swift_version = '5'
 
   s.dependency "React"
 end
