@@ -1,7 +1,7 @@
 {
   "name": "react-native-image-crop-tools",
   "title": "React Native Image Crop Tools",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TODO",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
