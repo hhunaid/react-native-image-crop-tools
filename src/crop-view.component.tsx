@@ -35,7 +35,7 @@ class CropView extends React.PureComponent<Props> {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.viewRef.current!),
       UIManager.getViewManagerConfig('CropView').Commands.saveImage,
-      [quality],
+      [quality]
     );
   };
 
