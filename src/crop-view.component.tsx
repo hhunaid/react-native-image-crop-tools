@@ -21,7 +21,7 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   onImageCrop?: (res: Response) => void;
   keepAspectRatio?: boolean;
-  aspectRatio?: { width: number, height: number };
+  aspectRatio?: { width: number; height: number };
 };
 
 class CropView extends React.PureComponent<Props> {
