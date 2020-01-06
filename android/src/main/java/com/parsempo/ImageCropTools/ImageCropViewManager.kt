@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -12,7 +13,6 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File
 import java.util.*
-import kotlin.math.abs
 
 class ImageCropViewManager: SimpleViewManager<CropImageView>() {
     companion object {
@@ -66,27 +66,6 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
         }
     }
 
-    // Taken from StackOverflow
-    private fun convertDecimalToFraction(x: Double): Pair<Int, Int> {
-        val tolerance = 1.0E-6
-        var h1 = 1.0
-        var h2 = 0.0
-        var k1 = 0.0
-        var k2 = 1.0
-        var b = x
-        do {
-            val a = Math.floor(b)
-            var aux = h1
-            h1 = a * h1 + h2
-            h2 = aux
-            aux = k1
-            k1 = a * k1 + k2
-            k2 = aux
-            b = 1 / (b - a)
-        } while (abs(x - h1 / k1) > x * tolerance)
-        return Pair(h1.toInt(), k1.toInt())
-    }
-
     @ReactProp(name = SOURCE_URL_PROP)
     fun setSourceUrl(view: CropImageView, url: String?) {
         url?.let {
@@ -100,8 +79,7 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
     }
 
     @ReactProp(name = ASPECT_RATIO_PROP)
-    fun setAspectRatio(view: CropImageView, aspectRatio: Double) {
-        val ratio = convertDecimalToFraction(aspectRatio)
-        view.setAspectRatio(ratio.first, ratio.second)
+    fun setAspectRatio(view: CropImageView, aspectRatio: ReadableMap) {
+        view.setAspectRatio(aspectRatio.getInt("width"), aspectRatio.getInt("height"))
     }
 }

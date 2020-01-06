@@ -26,14 +26,14 @@ const App: () => React$Node = () => {
             });
           }}
         />
-        <CropView
+        {uri !== undefined && <CropView
           sourceUrl={uri}
           style={styles.cropView}
           ref={cropViewRef}
           onImageCrop={(res) => console.warn(res)}
           keepAspectRatio
-          aspectRatio={16.0 / 9.0}
-        />
+          aspectRatio={{width: 16, height: 9}}
+        />}
         <Button
           title={'Get Cropped View'}
           onPress={() => {

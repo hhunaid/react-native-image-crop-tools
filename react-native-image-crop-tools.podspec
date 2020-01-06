@@ -15,12 +15,10 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/hhunaid/react-native-image-crop-tools.git", :tag => "#{s.version}" }
 
-  s.public_header_files = "ios/**/*.h"
-  s.resource_bundles = { 'CropViewController' =>'ios/CropViewController/*.png' }
-  s.source_files = "ios/**/*.{h,m,swift}"
+  s.source_files = "ios/**/*.{h,m}"
   s.requires_arc = true
-  s.swift_version = '5'
 
   s.dependency "React"
+  s.dependency "TOCropViewController"
 end
 

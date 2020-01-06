@@ -182,8 +182,9 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-image-crop-tools (1.0.0):
+  - react-native-image-crop-tools (1.0.5):
     - React
+    - TOCropViewController
   - react-native-image-picker (1.1.0):
     - React
   - React-RCTActionSheet (0.61.5):
@@ -221,6 +222,7 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
+  - TOCropViewController (2.5.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -258,6 +260,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -331,7 +334,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-image-crop-tools: 74b8c71e59d51dd5aa77aff44673e575e3eca56d
+  react-native-image-crop-tools: 61fc7bb25d2e95b1610e5e27a7e1db913a93f4db
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
@@ -343,6 +346,7 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
+  TOCropViewController: e9da34f484aedd4e5d5a8ab230ba217cfe16c729
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: 8cddc46dfdf0b9bc06f9c220c25ad867d5ab79c3
