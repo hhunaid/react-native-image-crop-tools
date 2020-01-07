@@ -45,7 +45,7 @@ class CropView extends React.PureComponent<Props> {
       UIManager.getViewManagerConfig('CropView').Commands.rotateImage,
       [clockwise]
     );
-  }
+  };
 
   public render() {
     const { sourceUrl, style, onImageCrop, keepAspectRatio, aspectRatio } = this.props;
