@@ -22,7 +22,9 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
         const val KEEP_ASPECT_RATIO_PROP = "keepAspectRatio"
         const val ASPECT_RATIO_PROP = "cropAspectRatio"
         const val SAVE_IMAGE_COMMAND = 1
+        const val ROTATE_IMAGE_COMMAND = 2
         const val SAVE_IMAGE_COMMAND_NAME = "saveImage"
+        const val ROTATE_IMAGE_COMMAND_NAME = "rotateImage"
     }
 
     override fun createViewInstance(reactContext: ThemedReactContext): CropImageView {
@@ -55,14 +57,23 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
     }
 
     override fun getCommandsMap(): MutableMap<String, Int> {
-        return MapBuilder.of(SAVE_IMAGE_COMMAND_NAME, SAVE_IMAGE_COMMAND)
+        return MapBuilder.of(
+                SAVE_IMAGE_COMMAND_NAME, SAVE_IMAGE_COMMAND,
+                ROTATE_IMAGE_COMMAND_NAME, ROTATE_IMAGE_COMMAND
+        )
     }
 
     override fun receiveCommand(root: CropImageView, commandId: Int, args: ReadableArray?) {
-        if (commandId == SAVE_IMAGE_COMMAND) {
-            val path = File(root.context.cacheDir, "${UUID.randomUUID()}.jpg").toURI().toString()
-            val quality = args?.getInt(0) ?: 100
-            root.saveCroppedImageAsync(Uri.parse(path), Bitmap.CompressFormat.JPEG, quality)
+        when (commandId) {
+            SAVE_IMAGE_COMMAND -> {
+                val path = File(root.context.cacheDir, "${UUID.randomUUID()}.jpg").toURI().toString()
+                val quality = args?.getInt(0) ?: 100
+                root.saveCroppedImageAsync(Uri.parse(path), Bitmap.CompressFormat.JPEG, quality)
+            }
+            ROTATE_IMAGE_COMMAND -> {
+                val clockwise = args?.getBoolean(0) ?: true
+                root.rotateImage(if (clockwise) 90 else -90)
+            }
         }
     }
 

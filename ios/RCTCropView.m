@@ -35,7 +35,7 @@
 }
 
 - (UIImage *)getCroppedImage {
-    return [_inlineCropView.image croppedImageWithFrame:_inlineCropView.imageCropFrame angle:0 circularClip:NO];
+    return [_inlineCropView.image croppedImageWithFrame:_inlineCropView.imageCropFrame angle:_inlineCropView.angle circularClip:NO];
 }
 
 - (void)setCropAspectRatio:(CGSize)aspectRatio {
@@ -58,6 +58,10 @@
 
 - (BOOL)keepAspectRatio {
     return _inlineCropView.aspectRatioLockEnabled;
+}
+
+- (void)rotateImage:(BOOL)clockwise {
+    [_inlineCropView rotateImageNinetyDegreesAnimated:YES clockwise:clockwise];
 }
 
 @end

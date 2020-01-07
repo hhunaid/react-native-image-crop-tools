@@ -43,4 +43,11 @@ RCT_EXPORT_METHOD(saveImage:(nonnull NSNumber*) reactTag quality:(nonnull NSNumb
     }];
 }
 
+RCT_EXPORT_METHOD(rotateImage:(nonnull NSNumber*) reactTag clockwise:(BOOL) clockwise) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
+        RCTCropView *cropView = (RCTCropView *)viewRegistry[reactTag];
+        [cropView rotateImage:clockwise];
+    }];
+}
+
 @end
