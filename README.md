@@ -1,8 +1,10 @@
 # react-native-image-crop-tools
 
 ## Previews
-
-![](https://github.com/hhunaid/react-native-image-crop-tools/blob/master/previews/android-preview.gif?raw=true) ![](https://github.com/hhunaid/react-native-image-crop-tools/blob/master/previews/ios-preview.gif?raw=true)
+<p float="left">
+  <img src="https://github.com/hhunaid/react-native-image-crop-tools/blob/master/previews/android-preview.gif?raw=true" width="150" />
+  <img src="https://github.com/hhunaid/react-native-image-crop-tools/blob/master/previews/ios-preview.gif?raw=true" width="150" /> 
+</p>
 
 ## Getting started
 
