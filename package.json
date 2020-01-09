@@ -2,7 +2,7 @@
   "name": "react-native-image-crop-tools",
   "title": "React Native Image Crop Tools",
   "version": "1.2.1",
-  "description": "TODO",
+  "description": "Native image crop tools with embeddable UI and on the fly aspect ratio switchin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
@@ -21,7 +21,14 @@
     "baseUrl": "https://github.com/hhunaid/react-native-image-crop-tools"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "crop",
+    "cropping",
+    "image",
+    "rotate",
+    "native",
+    "react",
+    "typescript"
   ],
   "author": {
     "name": "Hunaid Hassan",
