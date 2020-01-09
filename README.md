@@ -1,15 +1,16 @@
 # react-native-image-crop-tools
 
+## Previews
+
+![](https://github.com/hhunaid/react-native-image-crop-tools/blob/master/previews/android-preview.gif?raw=true) ![](https://github.com/hhunaid/react-native-image-crop-tools/blob/master/previews/ios-preview.gif?raw=true)
+
 ## Getting started
 
 `$ yarn add react-native-image-crop-tools`
 
 ### Mostly Automatic installation
 
-Only RN > 0.61.x is supported. Installation is automatic on Android. For iOS, if your project doesn't have Swift already set up you need to do following.
-
-1. Add a blank Swift file to your project. Xcode will ask if you want to create a brdiging header you can choose to add it or not. What this does is tells Xcode to bundle Swift libraries. This will add a couple of MBs to your application
-2. Make sure you are using Xcode 11 because only Swift 5.x is supported
+Only RN > 0.61.x is supported. Installation is automatic on Android. For iOS. Remember to run `pod install` in iOS directory
    
 ### Why another cropping library?
 
@@ -39,9 +40,16 @@ import { CropView } from 'react-native-image-crop-tools';
         />
 ```
 
+Two methods are exposed on the ref you can use them as follows
+
+```javascript
+  this.cropViewRef.saveImage(90 // image quality percentage)
+  this.cropViewRef.rotateImage(true // true for clockwise, false for counterclockwise)
+```
+
 For detailed usage check out the example app.
 
 #### TODO:
 
-- [ ] Add screenshots
+- [x] Add screenshots
 - [ ] Add access to prebuilt UI for those who want to use it.

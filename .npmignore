@@ -1,5 +1,6 @@
 src/
 Example/
+previews/
 README.md
 tsconfig.json
 tslint.json
