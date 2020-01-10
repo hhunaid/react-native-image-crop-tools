@@ -22,15 +22,26 @@ RCT_EXPORT_VIEW_PROPERTY(onImageSaved, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(keepAspectRatio, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(cropAspectRatio, CGSize)
 
-RCT_EXPORT_METHOD(saveImage:(nonnull NSNumber*) reactTag quality:(nonnull NSNumber *) quality) {
+RCT_EXPORT_METHOD(saveImage:(nonnull NSNumber*) reactTag
+                  preserveTransparency:(BOOL) preserveTransparency
+                  quality:(nonnull NSNumber *) quality) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
         RCTCropView *cropView = (RCTCropView *)viewRegistry[reactTag];
         UIImage *image = [cropView getCroppedImage];
         
-        NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
-        NSURL *url = [[paths firstObject] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", [[NSUUID UUID] UUIDString]]];
+        NSString *extension = @"jpg";
+        if ([[image valueForKey:@"hasAlpha"] boolValue] && preserveTransparency) {
+            extension = @"png";
+        }
         
-        [UIImageJPEGRepresentation(image, [quality floatValue] / 10.0f) writeToURL:url atomically:YES];
+        NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
+        NSURL *url = [[paths firstObject] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [[NSUUID UUID] UUIDString], extension]];
+        
+        if ([[image valueForKey:@"hasAlpha"] boolValue] && preserveTransparency) {
+            [UIImagePNGRepresentation(image) writeToURL:url atomically:YES];
+        }else {
+            [UIImageJPEGRepresentation(image, [quality floatValue] / 10.0f) writeToURL:url atomically:YES];
+        }
         
         CGSize imageSize = image.size;
         

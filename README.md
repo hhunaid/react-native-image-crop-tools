@@ -38,14 +38,14 @@ import { CropView } from 'react-native-image-crop-tools';
           ref={cropViewRef}
           onImageCrop={(res) => console.warn(res)}
           keepAspectRatio
-          aspectRatio={16.0 / 9.0}
+          aspectRatio={{width: 16, height: 9}}
         />
 ```
 
 Two methods are exposed on the ref you can use them as follows
 
 ```javascript
-  this.cropViewRef.saveImage(90 // image quality percentage)
+  this.cropViewRef.saveImage(true, 90 // image quality percentage)
   this.cropViewRef.rotateImage(true // true for clockwise, false for counterclockwise)
 ```
 
@@ -54,4 +54,5 @@ For detailed usage check out the example app.
 #### TODO:
 
 - [x] Add screenshots
+- [x] Support transparency
 - [ ] Add access to prebuilt UI for those who want to use it.

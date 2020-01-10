@@ -31,11 +31,11 @@ class CropView extends React.PureComponent<Props> {
 
   private viewRef = createRef<any>();
 
-  public saveImage = (quality: number) => {
+  public saveImage = (preserveTransparency: boolean = true, quality: number = 90) => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.viewRef.current!),
       UIManager.getViewManagerConfig('CropView').Commands.saveImage,
-      [quality]
+      [preserveTransparency, quality]
     );
   };
 

@@ -66,12 +66,20 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
     override fun receiveCommand(root: CropImageView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             SAVE_IMAGE_COMMAND -> {
-                val path = File(root.context.cacheDir, "${UUID.randomUUID()}.jpg").toURI().toString()
+                val preserveTransparency = args?.getBoolean(0) ?: false
+                var extension = "jpg"
+                var format = Bitmap.CompressFormat.JPEG
+                if (preserveTransparency && root.croppedImage.hasAlpha()) {
+                    extension = "png"
+                    format = Bitmap.CompressFormat.PNG
+                }
+                val path = File(root.context.cacheDir, "${UUID.randomUUID()}.$extension").toURI().toString()
                 val quality = args?.getInt(0) ?: 100
-                root.saveCroppedImageAsync(Uri.parse(path), Bitmap.CompressFormat.JPEG, quality)
+
+                root.saveCroppedImageAsync(Uri.parse(path), format, quality)
             }
             ROTATE_IMAGE_COMMAND -> {
-                val clockwise = args?.getBoolean(0) ?: true
+                val clockwise = args?.getBoolean(1) ?: true
                 root.rotateImage(if (clockwise) 90 else -90)
             }
         }
