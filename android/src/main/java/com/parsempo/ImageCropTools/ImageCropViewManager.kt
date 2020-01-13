@@ -74,12 +74,12 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
                     format = Bitmap.CompressFormat.PNG
                 }
                 val path = File(root.context.cacheDir, "${UUID.randomUUID()}.$extension").toURI().toString()
-                val quality = args?.getInt(0) ?: 100
+                val quality = args?.getInt(1) ?: 100
 
                 root.saveCroppedImageAsync(Uri.parse(path), format, quality)
             }
             ROTATE_IMAGE_COMMAND -> {
-                val clockwise = args?.getBoolean(1) ?: true
+                val clockwise = args?.getBoolean(0) ?: true
                 root.rotateImage(if (clockwise) 90 else -90)
             }
         }
