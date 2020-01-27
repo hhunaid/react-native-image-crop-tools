@@ -98,7 +98,11 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
     }
 
     @ReactProp(name = ASPECT_RATIO_PROP)
-    fun setAspectRatio(view: CropImageView, aspectRatio: ReadableMap) {
-        view.setAspectRatio(aspectRatio.getInt("width"), aspectRatio.getInt("height"))
+    fun setAspectRatio(view: CropImageView, aspectRatio: ReadableMap?) {
+        if (aspectRatio != null) {
+            view.setAspectRatio(aspectRatio.getInt("width"), aspectRatio.getInt("height"))
+        }else {
+            view.clearAspectRatio()
+        }
     }
 }
