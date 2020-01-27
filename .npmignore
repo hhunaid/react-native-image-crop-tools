@@ -8,4 +8,4 @@ node_modules
 .prettierrc
 .watchmanconfig
 .idea
-build/
+/android/build/
