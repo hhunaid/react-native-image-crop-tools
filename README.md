@@ -12,7 +12,9 @@
 
 ### Mostly Automatic installation
 
-Only RN > 0.61.x is supported. Installation is automatic on Android. For iOS. Remember to run `pod install` in iOS directory
+Only RN > 0.61.x is supported.
+- Android: Installation is automatic.
+- iOS: Add `pod 'react-native-image-crop-tools', :path => '../node_modules/react-native-image-crop-tools'` in your podfile below the line `use_native_modules!`. Then run `pod install`in iOS folder.
    
 ### Why another cropping library?
 
