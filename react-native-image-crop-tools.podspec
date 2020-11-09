@@ -19,6 +19,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "TOCropViewController"
+  s.dependency 'TOCropViewController', '2.5.3'
 end
 

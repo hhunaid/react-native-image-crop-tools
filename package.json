@@ -35,7 +35,6 @@
     "email": "hhunaid@gmail.com"
   },
   "license": "MIT",
-  "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
     "react": "^16.8.1",
