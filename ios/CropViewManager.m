@@ -40,7 +40,7 @@ RCT_EXPORT_METHOD(saveImage:(nonnull NSNumber*) reactTag
         if ([[image valueForKey:@"hasAlpha"] boolValue] && preserveTransparency) {
             [UIImagePNGRepresentation(image) writeToURL:url atomically:YES];
         }else {
-            [UIImageJPEGRepresentation(image, [quality floatValue] / 10.0f) writeToURL:url atomically:YES];
+            [UIImageJPEGRepresentation(image, [quality floatValue] / 100.0f) writeToURL:url atomically:YES];
         }
         
         CGSize imageSize = image.size;
