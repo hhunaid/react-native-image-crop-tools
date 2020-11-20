@@ -8,9 +8,10 @@
 #import "RCTCropView.h"
 #import <TOCropViewController/TOCropView.h>
 #import <TOCropViewController/UIImage+CropRotate.h>
+#import <Photos/Photos.h>
 
 @implementation RCTCropView {
-    TOCropView * _inlineCropView;
+    TOCropView * _inlineCropView, *url;
 }
 
 @synthesize sourceUrl, keepAspectRatio, cropAspectRatio;
