@@ -6,6 +6,7 @@
 //
 
 #import <React/RCTView.h>
+#import <Photos/Photos.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (atomic, assign) BOOL keepAspectRatio;
 @property (nonatomic, assign) CGSize cropAspectRatio;
 @property (nonatomic, strong) RCTDirectEventBlock onImageSaved;
-@property (nonatomic, strong) PHImageRequestOptions *requestOptions; 
+@property (nonatomic, strong) PHImageRequestOptions * requestOptions; 
 
 - (UIImage *)getCroppedImage;
 - (void)rotateImage:(BOOL)clockwise;

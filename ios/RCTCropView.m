@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 
 @implementation RCTCropView {
-    TOCropView * _inlineCropView, *url;
+    TOCropView * _inlineCropView, * url;
 }
 
 @synthesize sourceUrl, keepAspectRatio, cropAspectRatio;
