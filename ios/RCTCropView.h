@@ -12,12 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RCTCropView : RCTView
 
-@property (nonatomic, retain, readonly) PHImageRequestOptions *requestOptions;
 @property (nonatomic, strong) NSString * sourceUrl;
 @property (atomic, assign) BOOL keepAspectRatio;
 @property (nonatomic, assign) CGSize cropAspectRatio;
 @property (nonatomic, strong) RCTDirectEventBlock onImageSaved;
-
 
 - (UIImage *)getCroppedImage;
 - (void)rotateImage:(BOOL)clockwise;

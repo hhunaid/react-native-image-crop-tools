@@ -10,9 +10,6 @@
 #import <TOCropViewController/UIImage+CropRotate.h>
 #import <Photos/Photos.h>
 
-@interface RCTCropView()
-@property (nonatomic, retain, readwrite) PHImageRequestOptions * requestOptions;
-@end
 
 @implementation RCTCropView {
     TOCropView * _inlineCropView;
@@ -22,29 +19,28 @@
 
 - (void)layoutSubviews {
     if (_inlineCropView == nil) {
-    if([sourceUrl rangeOfString:@"ph://"].location == 0) {
-    NSString *url;
-    url =[sourceUrl stringByReplacingOccurrencesOfString:@"ph://" withString:@""];
-    self.requestOptions = [[PHImageRequestOptions alloc] init];
-    self.requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
-    self.requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    self.requestOptions.synchronous = YES;
-
-    PHAsset *photosAsset = [PHAsset fetchAssetsWithLocalIdentifiers:@[url] options: nil].lastObject;
-     PHImageManager *manager = [PHImageManager defaultManager];
-      __block UIImage *ima;
-        [manager requestImageForAsset:photosAsset
-            targetSize:PHImageManagerMaximumSize
-            contentMode:PHImageContentModeDefault
-            options:self.requestOptions
-            resultHandler:^void(UIImage *image, NSDictionary *info) {
-            ima = image;
-         }];
-    _inlineCropView = [[TOCropView alloc] initWithImage:ima];
-    } else { 
-        UIImage * image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:sourceUrl]]];
-        _inlineCropView = [[TOCropView alloc] initWithImage:image];
-    } 
+        if([sourceUrl rangeOfString:@"ph://"].location == 0) {
+            NSString *url = [sourceUrl stringByReplacingOccurrencesOfString:@"ph://" withString:@""];
+            PHImageRequestOptions * requestOptions = [[PHImageRequestOptions alloc] init];
+            requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
+            requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+            requestOptions.synchronous = YES;
+            
+            PHAsset *photosAsset = [PHAsset fetchAssetsWithLocalIdentifiers:@[url] options: nil].lastObject;
+            PHImageManager *manager = [PHImageManager defaultManager];
+            __block UIImage *blockImage;
+            [manager requestImageForAsset:photosAsset
+                               targetSize:PHImageManagerMaximumSize
+                              contentMode:PHImageContentModeDefault
+                                  options:requestOptions
+                            resultHandler:^void(UIImage *image, NSDictionary *info) {
+                blockImage = image;
+            }];
+            _inlineCropView = [[TOCropView alloc] initWithImage:blockImage];
+        } else {
+            UIImage * image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:sourceUrl]]];
+            _inlineCropView = [[TOCropView alloc] initWithImage:image];
+        }
         _inlineCropView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _inlineCropView.frame = self.bounds;
         if (self->keepAspectRatio) {
