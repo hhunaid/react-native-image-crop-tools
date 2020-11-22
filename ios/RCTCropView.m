@@ -10,14 +10,20 @@
 #import <TOCropViewController/UIImage+CropRotate.h>
 #import <Photos/Photos.h>
 
+@interface RCTCropView()
+@property (nonatomic, retain, readwrite) PHImageRequestOptions * requestOptions;
+@end
+
 @implementation RCTCropView {
-    TOCropView * _inlineCropView, * url;
+    TOCropView * _inlineCropView;
 }
 
 @synthesize sourceUrl, keepAspectRatio, cropAspectRatio;
 
 - (void)layoutSubviews {
     if (_inlineCropView == nil) {
+    if([sourceUrl rangeOfString:@"ph://"].location == 0) {
+    NSString *url;
     url =[sourceUrl stringByReplacingOccurrencesOfString:@"ph://" withString:@""];
     self.requestOptions = [[PHImageRequestOptions alloc] init];
     self.requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
@@ -25,7 +31,6 @@
     self.requestOptions.synchronous = YES;
 
     PHAsset *photosAsset = [PHAsset fetchAssetsWithLocalIdentifiers:@[url] options: nil].lastObject;
-    if([sourceUrl rangeOfString:@"ph://"].location == 0) {
      PHImageManager *manager = [PHImageManager defaultManager];
       __block UIImage *ima;
         [manager requestImageForAsset:photosAsset
