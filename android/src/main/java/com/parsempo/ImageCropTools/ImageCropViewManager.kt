@@ -1,6 +1,7 @@
 package com.parsempo.ImageCropTools
 
 import android.graphics.Bitmap
+import android.graphics.Rect
 import android.net.Uri
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
@@ -90,6 +91,7 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
         url?.let {
             view.setImageUriAsync(Uri.parse(it))
         }
+        view.cropRect = Rect(0,0,10000,10000)
     }
 
     @ReactProp(name = KEEP_ASPECT_RATIO_PROP)
