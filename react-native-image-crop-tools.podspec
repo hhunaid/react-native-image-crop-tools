@@ -3,11 +3,11 @@ require "json"
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name         = "react-native-image-crop-tools"
+  s.name         = "react-native-image-crop-tools-v2"
   s.version      = package["version"]
   s.summary      = package["description"]
   s.description  = <<-DESC
-                  react-native-image-crop-tools
+                  react-native-image-crop-tools-v2
                    DESC
   s.homepage     = "https://github.com/hiblocks/react-native-image-crop-tools-v2"
   s.license      = "MIT"

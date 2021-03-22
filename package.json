@@ -1,7 +1,7 @@
 {
-  "name": "react-native-image-crop-tools",
-  "title": "React Native Image Crop Tools",
-  "version": "1.3.6",
+  "name": "@hiblocks/react-native-image-crop-tools-v2",
+  "title": "React Native Image Crop Tools (hiblocks)",
+  "version": "1.3.8",
   "description": "Native image crop tools with embeddable UI and on the fly aspect ratio switchin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,8 +18,8 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hhunaid/react-native-image-crop-tools.git",
-    "baseUrl": "https://github.com/hhunaid/react-native-image-crop-tools"
+    "url": "git+https://github.com/hiblocks/react-native-image-crop-tools-v2.git",
+    "baseUrl": "https://github.com/hiblocks/react-native-image-crop-tools-v2"
   },
   "keywords": [
     "react-native",
@@ -32,8 +32,8 @@
     "typescript"
   ],
   "author": {
-    "name": "Hunaid Hassan",
-    "email": "hhunaid@gmail.com"
+    "name": "hiblocks",
+    "email": "hiblocks.co@gmail.com"
   },
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -42,13 +42,13 @@
     "react-native": ">=0.59.0-rc.0 <1.0.x"
   },
   "devDependencies": {
+    "@types/react-native": "^0.60.23",
+    "prettier": "^1.19.1",
     "react": "^16.9.0",
-    "react-native": "^0.61.0",
+    "react-native": "^0.64.0",
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
-    "typescript": "^3.7.2",
-    "prettier": "^1.19.1",
-    "@types/react-native": "^0.60.23"
+    "typescript": "^3.9.9"
   }
 }
