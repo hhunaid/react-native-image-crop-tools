@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "react": "^16.9.0",
-    "react-native": "^0.61.0",
+    "react-native": "^0.62.3",
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
