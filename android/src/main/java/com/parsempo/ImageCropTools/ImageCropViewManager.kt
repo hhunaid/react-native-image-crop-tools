@@ -9,8 +9,8 @@ import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
+import com.canhub.cropper.CropImageView
 import com.facebook.react.uimanager.events.RCTEventEmitter
-import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File
 import java.util.*
 
@@ -32,9 +32,9 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
         view.setOnCropImageCompleteListener { _, result ->
             if (result.isSuccessful) {
                 val map = Arguments.createMap()
-                map.putString("uri", result.uri.toString())
-                map.putInt("width", result.cropRect.width())
-                map.putInt("height", result.cropRect.height())
+                map.putString("uri", result.getUriFilePath(reactContext).toString())
+                map.putInt("width", result.cropRect!!.width())
+                map.putInt("height", result.cropRect!!.height())
                 reactContext.getJSModule(RCTEventEmitter::class.java)?.receiveEvent(
                         view.id,
                         ON_IMAGE_SAVED,
@@ -69,14 +69,14 @@ class ImageCropViewManager: SimpleViewManager<CropImageView>() {
                 val preserveTransparency = args?.getBoolean(0) ?: false
                 var extension = "jpg"
                 var format = Bitmap.CompressFormat.JPEG
-                if (preserveTransparency && root.croppedImage.hasAlpha()) {
+                if (preserveTransparency && root.croppedImage!!.hasAlpha()) {
                     extension = "png"
                     format = Bitmap.CompressFormat.PNG
                 }
                 val path = File(root.context.cacheDir, "${UUID.randomUUID()}.$extension").toURI().toString()
                 val quality = args?.getInt(1) ?: 100
 
-                root.saveCroppedImageAsync(Uri.parse(path), format, quality)
+                root.croppedImageAsync(format, quality, customOutputUri = Uri.parse(path))
             }
             ROTATE_IMAGE_COMMAND -> {
                 val clockwise = args?.getBoolean(0) ?: true

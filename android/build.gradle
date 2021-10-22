@@ -3,13 +3,13 @@ def safeExtGet(prop, fallback) {
 }
 
 buildscript {
-    ext.kotlin_version = '1.3.61'
+    ext.kotlin_version = '1.5.21'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -20,7 +20,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         flatDir {
             dirs 'libs'
         }
@@ -29,12 +29,11 @@ allprojects {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', 27)
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 15)
+        minSdkVersion safeExtGet('minSdkVersion', 17)
         targetSdkVersion safeExtGet('targetSdkVersion', 27)
         versionCode 1
         versionName "1.0"
@@ -49,6 +48,6 @@ android {
 
 dependencies {
     api "com.facebook.react:react-native:+"
-    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'com.github.CanHub:Android-Image-Cropper:3.3.5'
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
