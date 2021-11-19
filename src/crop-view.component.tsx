@@ -22,6 +22,7 @@ type Props = {
   onImageCrop?: (res: Response) => void;
   keepAspectRatio?: boolean;
   aspectRatio?: { width: number; height: number };
+  aspectRatioLockDimensionSwapEnabled?: boolean;
 };
 
 class CropView extends React.PureComponent<Props> {
@@ -48,7 +49,7 @@ class CropView extends React.PureComponent<Props> {
   };
 
   public render() {
-    const { sourceUrl, style, onImageCrop, keepAspectRatio, aspectRatio } = this.props;
+    const { sourceUrl, style, onImageCrop, keepAspectRatio, aspectRatio, aspectRatioLockDimensionSwapEnabled } = this.props;
 
     return (
       <RCTCropView
@@ -60,6 +61,7 @@ class CropView extends React.PureComponent<Props> {
         }}
         keepAspectRatio={keepAspectRatio}
         cropAspectRatio={aspectRatio}
+        aspectRatioLockDimensionSwapEnabled={aspectRatioLockDimensionSwapEnabled}
       />
     );
   }

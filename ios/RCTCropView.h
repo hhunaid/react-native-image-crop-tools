@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString * sourceUrl;
 @property (atomic, assign) BOOL keepAspectRatio;
+@property (atomic, assign) BOOL aspectRatioLockDimensionSwapEnabled;
 @property (nonatomic, assign) CGSize cropAspectRatio;
 @property (nonatomic, strong) RCTDirectEventBlock onImageSaved;
 
