@@ -43,7 +43,6 @@
         }
         _inlineCropView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _inlineCropView.frame = self.bounds;
-        _inlineCropView.backgroundColor = UIColor.blackColor;
         if (self->keepAspectRatio) {
             _inlineCropView.aspectRatioLockEnabled = keepAspectRatio;
         }
@@ -55,7 +54,6 @@
         }
         [_inlineCropView moveCroppedContentToCenterAnimated:NO];
         [_inlineCropView performInitialSetup];
-        self.backgroundColor =  UIColor.blackColor;
 
         [self addSubview:_inlineCropView];
     }
