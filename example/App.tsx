@@ -42,7 +42,8 @@ const getAspectRatioText = (
 
 const App = () => {
   const [openCrop, setOpenCrop] = useState<boolean>(false);
-  const [image, setImage] = useState<string | null>('');
+  const [image, setImage] = useState<string | null>(null);
+  const [croppedImage, setCroppedImage] = useState<string | null>(null);
   const [aspectRatio, setAspectRatio] = useState<
     | {
         width: number;
@@ -56,6 +57,7 @@ const App = () => {
   const actionSheetRef = useRef<ActionSheet>(null);
 
   const pickImage = useCallback(async () => {
+    setCroppedImage(null);
     return new Promise<string | null>((resolve, reject) => {
       launchImageLibrary(
         {
@@ -121,6 +123,13 @@ const App = () => {
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.pickImageButtonWrapper}>
         <Button onPress={pickImage} title="Pick Image" />
+        {croppedImage ? (
+          <Image
+            resizeMode="cover"
+            source={{uri: croppedImage}}
+            style={styles.previewImage}
+          />
+        ) : null}
       </View>
       <Modal style={styles.modal} visible={openCrop}>
         <View style={styles.modalCloseButtonWrapper}>
@@ -134,8 +143,7 @@ const App = () => {
           <CropView
             aspectRatio={aspectRatio}
             keepAspectRatio={keepAspectRatio}
-            // tslint:disable-next-line:no-empty
-            onImageCrop={() => {}}
+            onImageCrop={({uri}) => setCroppedImage(uri)}
             ref={cropViewRef}
             sourceUrl={image as string}
             style={styles.cropView}
@@ -210,6 +218,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
+  },
+  previewImage: {
+    width: 200,
+    height: 200,
+    marginTop: 12,
   },
   modal: {
     backgroundColor: 'black',
