@@ -4,6 +4,7 @@ import {
   Dimensions,
   Image,
   Modal,
+  Platform,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -20,22 +21,23 @@ import ActionSheet from 'react-native-actions-sheet';
 import {CropView} from '../src';
 
 const {height} = Dimensions.get('window');
+const hitSlop = {top: 10, left: 10, bottom: 0, right: 10};
 
 const getAspectRatioText = (
-  aspect: {width: number; height: number} | undefined,
-  keepAR: boolean,
+  aspectRatio: {width: number; height: number} | undefined,
+  keepAspectRatio: boolean,
 ) => {
-  if (aspect == null) {
+  if (aspectRatio == null) {
     return 'Free';
   }
-  const isSquare = aspect.width === 4 && aspect.height === 4;
-  if (keepAR && !isSquare) {
-    return `${aspect.width}:${aspect.height}`;
+  const isSquare = aspectRatio.width === 4 && aspectRatio.height === 4;
+  if (keepAspectRatio && !isSquare) {
+    return `${aspectRatio.width}:${aspectRatio.height}`;
   }
   if (isSquare) {
     return 'Square';
   }
-  return `${aspect.width}:${aspect.height}`;
+  return `${aspectRatio.width}:${aspectRatio.height}`;
 };
 
 const App = () => {
@@ -91,24 +93,23 @@ const App = () => {
 
   const changeAspectRatio = (type: string) => {
     actionSheetRef?.current?.hide();
+    if (type === 'free') {
+      setKeepAspectRatio(false);
+    } else {
+      setKeepAspectRatio(true);
+    }
     switch (type) {
       case 'square':
-        setKeepAspectRatio(true);
         return setAspectRatio({width: 4, height: 4});
       case '16:9':
-        setKeepAspectRatio(true);
         return setAspectRatio({width: 16, height: 9});
       case '9:16':
-        setKeepAspectRatio(true);
         return setAspectRatio({width: 9, height: 16});
       case '4:3':
-        setKeepAspectRatio(true);
         return setAspectRatio({width: 4, height: 3});
       case '3:4':
-        setKeepAspectRatio(true);
         return setAspectRatio({width: 3, height: 4});
       case 'free':
-        setKeepAspectRatio(false);
         return setAspectRatio(undefined);
       default:
         setKeepAspectRatio(true);
@@ -117,13 +118,15 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView>
-      <Button onPress={pickImage} title="Pick Image" />
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.pickImageButtonWrapper}>
+        <Button onPress={pickImage} title="Pick Image" />
+      </View>
       <Modal style={styles.modal} visible={openCrop}>
         <View style={styles.modalCloseButtonWrapper}>
           <TouchableOpacity
             onPress={() => setOpenCrop(false)}
-            hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}>
+            hitSlop={hitSlop}>
             <Text style={styles.closeModalText}>Close</Text>
           </TouchableOpacity>
         </View>
@@ -138,7 +141,6 @@ const App = () => {
             style={styles.cropView}
           />
         </View>
-
         <View style={styles.buttonsWrapper}>
           <TouchableOpacity onPress={openSheet}>
             <View style={styles.button}>
@@ -161,7 +163,6 @@ const App = () => {
             </View>
           </TouchableOpacity>
         </View>
-
         <ActionSheet ref={actionSheetRef}>
           <View>
             <Text
@@ -205,6 +206,11 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  pickImageButtonWrapper: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
   modal: {
     backgroundColor: 'black',
     flex: 1,
@@ -226,8 +232,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   buttonImage: {
-    width: 44,
     height: 44,
+    width: 44,
   },
   button: {
     alignItems: 'center',
@@ -242,8 +248,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   modalCloseButtonWrapper: {
-    marginTop: 40,
-    marginLeft: 24,
+    marginTop: Platform.select({
+      android: 0,
+      ios: 40,
+    }),
+    marginLeft: 12,
   },
 });
 
