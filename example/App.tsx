@@ -120,9 +120,13 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.pickImageButtonWrapper}>
-        <Button onPress={pickImage} title="Pick Image" />
+        <Button
+          onPress={pickImage}
+          title="Pick Image"
+          color={Platform.OS === 'ios' ? 'white' : 'black'}
+        />
         {croppedImage ? (
           <Image
             resizeMode="cover"
@@ -139,16 +143,14 @@ const App = () => {
             <Text style={styles.closeModalText}>Close</Text>
           </TouchableOpacity>
         </View>
-        <View>
-          <CropView
-            aspectRatio={aspectRatio}
-            keepAspectRatio={keepAspectRatio}
-            onImageCrop={({uri}) => setCroppedImage(uri)}
-            ref={cropViewRef}
-            sourceUrl={image as string}
-            style={styles.cropView}
-          />
-        </View>
+        <CropView
+          aspectRatio={aspectRatio}
+          keepAspectRatio={keepAspectRatio}
+          onImageCrop={({uri}) => setCroppedImage(uri)}
+          ref={cropViewRef}
+          sourceUrl={image as string}
+          style={styles.cropView}
+        />
         <View style={styles.buttonsWrapper}>
           <TouchableOpacity onPress={openSheet}>
             <View style={styles.button}>
@@ -214,58 +216,66 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'black',
+    flex: 1,
+  },
   pickImageButtonWrapper: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
   previewImage: {
-    width: 200,
     height: 200,
     marginTop: 12,
+    width: 200,
   },
   modal: {
     backgroundColor: 'black',
     flex: 1,
   },
+  modalCloseButtonWrapper: {
+    backgroundColor: 'black',
+    paddingLeft: 12,
+    paddingTop: Platform.select({
+      android: 0,
+      ios: 40,
+    }),
+  },
+  closeModalText: {
+    color: 'white',
+    fontSize: 18,
+  },
   cropView: {
     backgroundColor: 'black',
     height: height - getBottomSpace() - 140,
-    margin: 2,
+  },
+  buttonsWrapper: {
+    backgroundColor: 'black',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingTop: 4,
+  },
+  button: {
+    alignItems: 'center',
+  },
+  buttonImage: {
+    height: 44,
+    width: 44,
+  },
+  buttonsText: {
+    color: 'white',
+    marginTop: 4,
   },
   actionSheetText: {
     fontSize: 20,
     margin: 14,
     marginLeft: 24,
   },
-  buttonsWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 4,
-  },
-  buttonImage: {
-    height: 44,
-    width: 44,
-  },
-  button: {
-    alignItems: 'center',
-  },
-  buttonsText: {
-    marginTop: 4,
-  },
   actionSheetButtonWrapper: {
-    marginBottom: getBottomSpace(),
-  },
-  closeModalText: {
-    fontSize: 18,
-  },
-  modalCloseButtonWrapper: {
-    marginTop: Platform.select({
-      android: 0,
-      ios: 40,
-    }),
-    marginLeft: 12,
+    marginBottom: getBottomSpace() + 12,
+    marginHorizontal: 24,
   },
 });
 
