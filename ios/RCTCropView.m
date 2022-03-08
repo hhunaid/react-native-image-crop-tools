@@ -15,7 +15,7 @@
     TOCropView * _inlineCropView;
 }
 
-@synthesize sourceUrl, keepAspectRatio, cropAspectRatio;
+@synthesize sourceUrl, keepAspectRatio, cropAspectRatio, aspectRatioLockDimensionSwapEnabled;
 
 - (void)layoutSubviews {
     if (_inlineCropView == nil) {
@@ -25,7 +25,7 @@
             requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
             requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
             requestOptions.synchronous = YES;
-            
+
             PHAsset *photosAsset = [PHAsset fetchAssetsWithLocalIdentifiers:@[url] options: nil].lastObject;
             PHImageManager *manager = [PHImageManager defaultManager];
             __block UIImage *blockImage;
@@ -46,12 +46,15 @@
         if (self->keepAspectRatio) {
             _inlineCropView.aspectRatioLockEnabled = keepAspectRatio;
         }
+        if (self->aspectRatioLockDimensionSwapEnabled) {
+            _inlineCropView.aspectRatioLockDimensionSwapEnabled = aspectRatioLockDimensionSwapEnabled;
+        }
         if (!CGSizeEqualToSize(self -> cropAspectRatio, CGSizeZero)) {
             _inlineCropView.aspectRatio = self->cropAspectRatio;
         }
         [_inlineCropView moveCroppedContentToCenterAnimated:NO];
         [_inlineCropView performInitialSetup];
-        
+
         [self addSubview:_inlineCropView];
     }
 }
@@ -80,6 +83,10 @@
 
 - (BOOL)keepAspectRatio {
     return _inlineCropView.aspectRatioLockEnabled;
+}
+
+- (BOOL)aspectRatioLockDimensionSwapEnabled {
+    return _inlineCropView.aspectRatioLockDimensionSwapEnabled;
 }
 
 - (void)rotateImage:(BOOL)clockwise {
