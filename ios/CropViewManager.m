@@ -21,7 +21,7 @@ RCT_EXPORT_VIEW_PROPERTY(sourceUrl, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onImageSaved, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(keepAspectRatio, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(cropAspectRatio, CGSize)
-RCT_EXPORT_VIEW_PROPERTY(aspectRatioLockDimensionSwapEnabled, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(iosDimensionSwapEnabled, BOOL)
 
 
 RCT_EXPORT_METHOD(saveImage:(nonnull NSNumber*) reactTag

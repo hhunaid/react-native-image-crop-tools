@@ -22,12 +22,13 @@ type Props = {
   onImageCrop?: (res: Response) => void;
   keepAspectRatio?: boolean;
   aspectRatio?: { width: number; height: number };
-  aspectRatioLockDimensionSwapEnabled?: boolean;
+  iosDimensionSwapEnabled?: boolean;
 };
 
 class CropView extends React.PureComponent<Props> {
   public static defaultProps = {
     keepAspectRatio: false,
+    iosDimensionSwapEnabled: false
   };
 
   private viewRef = createRef<any>();
@@ -49,19 +50,16 @@ class CropView extends React.PureComponent<Props> {
   };
 
   public render() {
-    const { sourceUrl, style, onImageCrop, keepAspectRatio, aspectRatio, aspectRatioLockDimensionSwapEnabled } = this.props;
+    const { onImageCrop, aspectRatio, ...rest } = this.props;
 
     return (
       <RCTCropView
         ref={this.viewRef}
-        sourceUrl={sourceUrl}
-        style={style}
+        cropAspectRatio={aspectRatio}
         onImageSaved={(event: NativeSyntheticEvent<Response>) => {
           onImageCrop!(event.nativeEvent);
         }}
-        keepAspectRatio={keepAspectRatio}
-        cropAspectRatio={aspectRatio}
-        aspectRatioLockDimensionSwapEnabled={aspectRatioLockDimensionSwapEnabled}
+        {...rest}
       />
     );
   }

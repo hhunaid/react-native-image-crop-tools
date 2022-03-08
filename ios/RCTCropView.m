@@ -15,7 +15,7 @@
     TOCropView * _inlineCropView;
 }
 
-@synthesize sourceUrl, keepAspectRatio, cropAspectRatio, aspectRatioLockDimensionSwapEnabled;
+@synthesize sourceUrl, keepAspectRatio, cropAspectRatio, iosDimensionSwapEnabled;
 
 - (void)layoutSubviews {
     if (_inlineCropView == nil) {
@@ -46,8 +46,8 @@
         if (self->keepAspectRatio) {
             _inlineCropView.aspectRatioLockEnabled = keepAspectRatio;
         }
-        if (self->aspectRatioLockDimensionSwapEnabled) {
-            _inlineCropView.aspectRatioLockDimensionSwapEnabled = aspectRatioLockDimensionSwapEnabled;
+        if (self->iosDimensionSwapEnabled) {
+            _inlineCropView.aspectRatioLockDimensionSwapEnabled = iosDimensionSwapEnabled;
         }
         if (!CGSizeEqualToSize(self -> cropAspectRatio, CGSizeZero)) {
             _inlineCropView.aspectRatio = self->cropAspectRatio;
@@ -85,7 +85,11 @@
     return _inlineCropView.aspectRatioLockEnabled;
 }
 
-- (BOOL)aspectRatioLockDimensionSwapEnabled {
+- (void)setIosDimensionSwapEnabled:(BOOL)iosDimensionSwapEnabled {
+    _inlineCropView.aspectRatioLockDimensionSwapEnabled = iosDimensionSwapEnabled;
+}
+
+- (BOOL)iosDimensionSwapEnabled {
     return _inlineCropView.aspectRatioLockDimensionSwapEnabled;
 }
 
