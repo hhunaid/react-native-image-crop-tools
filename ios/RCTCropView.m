@@ -86,7 +86,10 @@
 }
 
 - (void)setIosDimensionSwapEnabled:(BOOL)iosDimensionSwapEnabled {
-    _inlineCropView.aspectRatioLockDimensionSwapEnabled = iosDimensionSwapEnabled;
+    if (_inlineCropView) {
+        _inlineCropView.aspectRatioLockDimensionSwapEnabled = iosDimensionSwapEnabled;
+    }
+    self->iosDimensionSwapEnabled = iosDimensionSwapEnabled;
 }
 
 - (BOOL)iosDimensionSwapEnabled {
