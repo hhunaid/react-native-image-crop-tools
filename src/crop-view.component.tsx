@@ -28,7 +28,7 @@ type Props = {
 class CropView extends React.PureComponent<Props> {
   public static defaultProps = {
     keepAspectRatio: false,
-    iosDimensionSwapEnabled: false
+    iosDimensionSwapEnabled: false,
   };
 
   private viewRef = createRef<any>();
