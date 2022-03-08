@@ -51,7 +51,14 @@ Two methods are exposed on the ref you can use them as follows
   this.cropViewRef.rotateImage(true // true for clockwise, false for counterclockwise)
 ```
 
-For detailed usage check out the example app.
+### Props
+
+| Name | Description | Default |
+| ---- | ----------- | ------- |
+| sourceUrl | URL of the source image | `null` |
+| aspectRatio | Aspect ratio of the cropped image | `null` |
+| keepAspectRatio | Locks the aspect ratio to given aspect ratio | `false` |
+| iosDimensionSwapEnabled | (iOS Only) Swaps the width and height of the crop rectangle upon rotation | `false` |
 
 #### TODO:
 
