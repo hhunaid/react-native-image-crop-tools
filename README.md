@@ -28,7 +28,7 @@ Most cropping tools available for RN are usually wrappers over popular native to
 
 # NOTE
 
-This library is not supposed to work with local images. There are very few usecases for that. You need to provide a sourceUrl string which you can obtain from image pickers or downloading using rn-fetch-blob
+This library is not supposed to work directly with remote images. There are very few usecases for that. You need to provide a sourceUrl string for a local file which you can obtain from image pickers or by downloading a remote file with rn-fetch-blob
 
 ## Usage
 ```javascript
