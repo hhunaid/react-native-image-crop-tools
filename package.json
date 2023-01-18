@@ -1,7 +1,7 @@
 {
   "name": "react-native-image-crop-tools",
   "title": "React Native Image Crop Tools",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Native image crop tools with embeddable UI and on the fly aspect ratio switchin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
