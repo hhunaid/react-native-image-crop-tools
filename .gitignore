@@ -4,5 +4,7 @@ node_modules
 dist/
 build/
 /android/react-native-image-crop-tools.iml
+/android/.gradle
 contents.xcworkspacedata
 xcuserdata
+.vscode

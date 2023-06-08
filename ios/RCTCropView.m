@@ -63,6 +63,10 @@
     return [_inlineCropView.image croppedImageWithFrame:_inlineCropView.imageCropFrame angle:_inlineCropView.angle circularClip:NO];
 }
 
+- (CGRect)getCropFrame {
+    return _inlineCropView.imageCropFrame;
+}
+
 - (void)setCropAspectRatio:(CGSize)aspectRatio {
     if (_inlineCropView) {
         _inlineCropView.aspectRatio = aspectRatio;

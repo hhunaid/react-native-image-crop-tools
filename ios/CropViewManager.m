@@ -29,6 +29,7 @@ RCT_EXPORT_METHOD(saveImage:(nonnull NSNumber*) reactTag
                   quality:(nonnull NSNumber *) quality) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
         RCTCropView *cropView = (RCTCropView *)viewRegistry[reactTag];
+        CGRect cropFrame = [cropView getCropFrame];
         UIImage *image = [cropView getCroppedImage];
 
         NSString *extension = @"jpg";
@@ -45,14 +46,13 @@ RCT_EXPORT_METHOD(saveImage:(nonnull NSNumber*) reactTag
             [UIImageJPEGRepresentation(image, [quality floatValue] / 100.0f) writeToURL:url atomically:YES];
         }
 
-        CGSize imageSize = image.size;
-
-
         cropView.onImageSaved(@{
             @"uri": url.absoluteString,
-            @"width": [NSNumber numberWithDouble:imageSize.width],
-            @"height": [NSNumber numberWithDouble:imageSize.height]}
-        );
+            @"width": [NSNumber numberWithDouble:cropFrame.size.width],
+            @"height": [NSNumber numberWithDouble:cropFrame.size.height],
+            @"x": [NSNumber numberWithDouble:cropFrame.origin.x],
+            @"y": [NSNumber numberWithDouble:cropFrame.origin.y]
+        });
     }];
 }
 
