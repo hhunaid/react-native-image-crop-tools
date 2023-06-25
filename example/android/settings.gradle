@@ -1,0 +1,6 @@
+rootProject.name = 'reactNativeImageCropToolsExample'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':react-native-image-crop-tools'
+project(':react-native-image-crop-tools').projectDir = new File('../../android')
